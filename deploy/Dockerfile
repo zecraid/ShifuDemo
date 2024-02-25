@@ -15,9 +15,9 @@ FROM alpine:latest
 WORKDIR /app
 
 # 从第一个阶段拷贝构建好的应用
-COPY --from=builder /app/ShifuDemo/main .
+COPY --from=builder /app/main .
 
 EXPOSE 8080
 
 # 启动应用
-ENTRYPOINT ["./main"]
+CMD ["./main"]
