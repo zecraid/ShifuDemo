@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-shifu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-shifu
+  template:
+    metadata:
+      labels:
+        app: test-shifu
+    spec:
+      containers:
+        - name: shifutask
+          image: shifutask:latest
