@@ -15,7 +15,7 @@ FROM alpine:latest
 WORKDIR /app
 
 # 从第一个阶段拷贝构建好的应用
-COPY --from=builder /app/main .
+COPY --from=builder /app/ShifuDemo/main .
 
 EXPOSE 8080
 
