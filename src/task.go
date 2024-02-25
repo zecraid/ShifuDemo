@@ -10,26 +10,26 @@ import (
 	"time"
 )
 
-const measurementURL = "http://deviceshifu-plate-reader.deviceshifu.svc.cluster.local/get_measurement"
-const pollingInterval = 10 // 10 seconds, customize as needed
+const URL = "http://deviceshifu-plate-reader.deviceshifu.svc.cluster.local/get_measurement"
+const timeInterval = 10
 
 func main() {
 	for {
-		measurement, err := getMeasurement()
+		measurement, err := getData()
 		if err != nil {
-			fmt.Printf("Error getting measurement: %v\n", err)
+			fmt.Printf("%v\n", err)
 			continue
 		}
 
-		average := calculateAverage(measurement)
-		fmt.Printf("Average Measurement: %f\n", average)
+		average := average(measurement)
+		fmt.Println("Average= ", average)
 
-		time.Sleep(time.Second * time.Duration(pollingInterval))
+		time.Sleep(time.Second * time.Duration(timeInterval))
 	}
 }
 
-func getMeasurement() ([]float64, error) {
-	resp, err := http.Get(measurementURL)
+func getData() ([]float64, error) {
+	resp, err := http.Get(URL)
 	if err != nil {
 		return nil, err
 	}
@@ -39,13 +39,10 @@ func getMeasurement() ([]float64, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	// Split the response into individual values
 	valuesStr := strings.Fields(string(body))
 	fmt.Println(valuesStr)
 	values := make([]float64, len(valuesStr))
 
-	// Convert string values to float64
 	for i, v := range valuesStr {
 		val, err := strconv.ParseFloat(v, 64)
 		if err != nil {
@@ -57,7 +54,7 @@ func getMeasurement() ([]float64, error) {
 	return values, nil
 }
 
-func calculateAverage(values []float64) float64 {
+func average(values []float64) float64 {
 	if len(values) == 0 {
 		return 0.0
 	}
