@@ -4,12 +4,10 @@ FROM golang:latest AS builder
 WORKDIR /app
 
 # 拉取代码
-RUN git clone https://github.com/zecraid/ShifuDemo.git .
-
-COPY ./ShifuDemo .
+RUN git clone https://github.com/zecraid/ShifuDemo.git
 
 # 构建应用
-RUN go build -o main ./src/task.go
+RUN go build -o main ./ShifuDemo/src/task.go
 
 # 阶段2：创建最终的镜像
 FROM alpine:latest
