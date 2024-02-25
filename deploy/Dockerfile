@@ -7,7 +7,7 @@ WORKDIR /app
 RUN git clone https://github.com/zecraid/ShifuDemo.git .
 
 # 构建应用
-RUN go build -o main .
+RUN go build -o main ./src/test.go
 
 # 阶段2：创建最终的镜像
 FROM alpine:latest
