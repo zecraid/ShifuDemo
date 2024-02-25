@@ -20,4 +20,4 @@ COPY --from=builder /app/main .
 EXPOSE 8080
 
 # 启动应用
-CMD ["./main"]
+CMD ["./app/main"]
