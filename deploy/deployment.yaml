@@ -2,9 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: aatest-shifu
-build:
-  local:
-    push: false
 spec:
   replicas: 1
   selector:
