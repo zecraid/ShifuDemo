@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-const measurementURL = "deviceshifu-plate-reader.deviceshifu.svc.cluster.local/get_measurement"
+const measurementURL = "http://deviceshifu-plate-reader.deviceshifu.svc.cluster.local/get_measurement"
 const pollingInterval = 10 // 10 seconds, customize as needed
 
 func main() {
@@ -42,6 +42,7 @@ func getMeasurement() ([]float64, error) {
 
 	// Split the response into individual values
 	valuesStr := strings.Fields(string(body))
+	fmt.Println(valuesStr)
 	values := make([]float64, len(valuesStr))
 
 	// Convert string values to float64
